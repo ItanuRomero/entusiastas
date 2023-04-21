@@ -1,5 +1,5 @@
-# node_modules
-node_modules/
-
-# Next
+# Remove build and dev tools for next
 .next/
+
+# Remove dependencies since we already have the manifest file
+node_modules/
