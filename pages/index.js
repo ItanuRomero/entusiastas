@@ -7,6 +7,7 @@ function Home() {
           alignItems: "center",
           justifyContent: "space-around",
           height: "100vh",
+          flexWrap: "wrap",
         }}
       >
         <div>
