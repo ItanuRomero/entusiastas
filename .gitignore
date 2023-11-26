@@ -3,3 +3,6 @@
 
 # Remove dependencies since we already have the manifest file
 node_modules/
+
+# Remove .env
+.env
