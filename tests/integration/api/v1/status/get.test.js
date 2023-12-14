@@ -12,13 +12,13 @@ test("GET to /api/v1/status should return 200", async () => {
 
   expect(database.version).toBe("16.0");
 
-  expect(database.max_connections).toBeGreaterThan(1);
+  expect(database.max_connections).toEqual(100);
 
-  expect(database.used_connections).toBeGreaterThan(1);
+  expect(database.opened_connections).toEqual(1);
 
   expect(Object.keys(database)).toEqual([
     "version",
     "max_connections",
-    "used_connections",
+    "opened_connections",
   ]);
 });
