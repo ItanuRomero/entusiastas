@@ -10,10 +10,12 @@ export default async function status(request, response) {
     databaseInfo.max_connections = Number(
       (await database.query("SHOW MAX_CONNECTIONS;")).rows[0].max_connections,
     );
+    const databaseName = process.env.POSTGRES_DB;
     databaseInfo.opened_connections = (
-      await database.query(
-        "SELECT count(*)::int FROM pg_stat_activity WHERE datname = 'local_db';",
-      )
+      await database.query({
+        text: "SELECT count(*)::int FROM pg_stat_activity WHERE datname = $1;",
+        values: [databaseName],
+      })
     ).rows[0].count;
   } catch (e) {
     if (e instanceof Error) databaseInfo.error = "Cannot connect with database";
