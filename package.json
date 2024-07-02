@@ -27,6 +27,7 @@
   "homepage": "https://github.com/ItanuRomero/clone-tabnews#readme",
   "dependencies": {
     "dotenv": "^16.4.4",
+    "dotenv-expand": "^11.0.6",
     "next": "^13.1.6",
     "node-pg-migrate": "^6.2.2",
     "pg": "^8.11.3",
