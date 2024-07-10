@@ -18,7 +18,13 @@ export default async function status(request, response) {
       })
     ).rows[0].count;
   } catch (e) {
-    if (e instanceof Error) databaseInfo.error = "Cannot connect with database";
+    if (e instanceof Error)
+      return response.status(207).json({
+        updated_at: updatedAt,
+        dependencies: {
+          database: { error: "Cannot connect with database" },
+        },
+      });
   }
 
   response.status(200).json({
