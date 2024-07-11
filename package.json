@@ -10,6 +10,8 @@
     "services:down": "docker compose -f infra/compose.yaml down",
     "lint:prettier:check": "prettier --check .",
     "lint:prettier:fix": "prettier --write .",
+    "lint:eslint:check": "next lint",
+    "lint:eslint:fix": "next lint --fix",
     "test": "npm run services:up && echo '[next] Next App has been started' && npm run concurrently",
     "test:watch": "npm run services:up && echo '[next] Next App has been started' && npm run concurrently:watch",
     "concurrently": "concurrently --names next,jest --hide next -k -s command-jest \"next dev\" \"jest --runInBand\"",
@@ -41,6 +43,8 @@
   },
   "devDependencies": {
     "@types/jest": "^29.5.10",
+    "eslint": "8.57.0",
+    "eslint-config-next": "14.2.5",
     "jest": "^29.6.2",
     "prettier": "^3.0.1"
   }

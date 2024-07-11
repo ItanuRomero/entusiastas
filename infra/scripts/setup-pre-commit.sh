@@ -1,16 +1,22 @@
 #!/bin/sh
 
-# Define the pre-commit script content
 PRE_COMMIT_CONTENT='#!/bin/sh
 
 echo "Running pre-commit checks..."
 
-# Example pre-commit commands
-echo "Running linter..."
+echo "Running Prettier..."
 npm run lint:prettier:fix
 
 if [ $? -ne 0 ]; then
-  echo "Linter failed. Aborting commit."
+  echo "Prettier failed. Aborting commit."
+  exit 1
+fi
+
+echo "Running Eslint..."
+npm run lint:eslint:fix
+
+if [ $? -ne 0 ]; then
+  echo "Eslint failed. Aborting commit."
   exit 1
 fi
 
