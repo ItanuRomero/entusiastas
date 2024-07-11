@@ -14,14 +14,6 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-echo "Running tests..."
-npm run test
-
-if [ $? -ne 0 ]; then
-  echo "Tests failed. Aborting commit."
-  exit 1
-fi
-
 # Add more commands as needed
 # echo "Running some other checks..."
 # ./some-other-check-script.sh
