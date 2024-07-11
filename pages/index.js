@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 function Home() {
   return (
     <>
@@ -23,8 +25,9 @@ function Home() {
             flexDirection: "column",
           }}
         >
-          <img
+          <Image
             style={{ borderRadius: "9999px", width: "200px" }}
+            alt="Foto de Itanú Romero"
             src="https://avatars.githubusercontent.com/u/66224956?v=4"
           />
           <p>
