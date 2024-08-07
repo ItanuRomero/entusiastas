@@ -21,10 +21,6 @@ OBS: Em caso de problemas com o commitlint, veja [esta dica](https://github.com/
 
 #### Dicas
 
-##### Ajustar o prettier automático antes de realizar o commit
-
-Execute o arquivo `./infra/scripts/setup-pre-commit.sh` para configurar o prettier fix automático antes de realizar o commit localmente!
-
 ##### Ao encontrar o erro de commitlint no CI:
 
 Utilize o comando `git rebase -i HEAD~{número de commits do seu PR}` e modifique as mensagens de commit para respeitarem os commits do projeto
