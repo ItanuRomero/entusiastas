@@ -26,7 +26,9 @@ function Home() {
           }}
         >
           <Image
-            style={{ borderRadius: "9999px", width: "200px" }}
+            style={{ borderRadius: "9999px" }}
+            width={200}
+            height={200}
             alt="Foto de Itanú Romero"
             src="https://avatars.githubusercontent.com/u/66224956?v=4"
           />
