@@ -38,7 +38,7 @@
     "concurrently": "8.2.2",
     "dotenv": "16.4.5",
     "dotenv-expand": "11.0.6",
-    "next": "13.1.6",
+    "next": "14.2.7",
     "node-pg-migrate": "6.2.2",
     "pg": "8.12.0",
     "react": "18.3.1",
