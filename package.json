@@ -58,7 +58,7 @@
     "eslint-plugin-jest": "28.8.2",
     "husky": "9.1.5",
     "jest": "29.7.0",
-    "prettier": "3.0.1",
+    "prettier": "3.3.3",
     "secretlint": "8.2.4"
   },
   "config": {
