@@ -4,7 +4,8 @@
   "description": "Projeto end-to-end baseado no curso.dev -> Clonando o tabnews.com.br",
   "main": "index.js",
   "scripts": {
-    "dev": "npm run services:up && npm run services:wait:database && npm run migrations:up && next dev",
+    "dev": "cross-env NODE_ENV=development node ./infra/scripts/run-dev.js",
+    "start:dev": "npm run services:up && npm run services:wait:database && npm run migrations:up && next dev",
     "test": "npm run services:up && echo '[next] Next App has been started' && npm run concurrently",
     "posttest": "npm run services:stop",
     "test:watch": "npm run services:up && echo '[next] Next App has been started' && npm run concurrently:watch",
