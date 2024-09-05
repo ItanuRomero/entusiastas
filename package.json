@@ -4,7 +4,7 @@
   "description": "Projeto end-to-end baseado no curso.dev -> Clonando o tabnews.com.br",
   "main": "index.js",
   "scripts": {
-    "dev": "npm run services:up && npm run services:wait:database && npm run migration:up && next dev",
+    "dev": "npm run services:up && npm run services:wait:database && npm run migrations:up && next dev",
     "services:up": "docker compose -f infra/compose.yaml up -d",
     "services:stop": "docker compose -f infra/compose.yaml stop",
     "services:down": "docker compose -f infra/compose.yaml down",
@@ -18,8 +18,8 @@
     "test:watch": "npm run services:up && echo '[next] Next App has been started' && npm run concurrently:watch",
     "concurrently": "concurrently --names next,jest --hide next -k -s command-jest \"next dev\" \"jest --runInBand\"",
     "concurrently:watch": "concurrently --names next,jest --hide next -k -s command-jest \"next dev\" \"jest --watchAll --runInBand\"",
-    "migration:create": "node-pg-migrate -m './infra/migrations' create",
-    "migration:up": "node-pg-migrate -m './infra/migrations' up --envPath './.env.development'",
+    "migrations:create": "node-pg-migrate -m './infra/migrations' create",
+    "migrations:up": "node-pg-migrate -m './infra/migrations' up --envPath './.env.development'",
     "prepare": "husky",
     "commit": "cz"
   },
