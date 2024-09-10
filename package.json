@@ -20,8 +20,8 @@
     "lint:eslint:check": "next lint --dir .",
     "lint:eslint:fix": "next lint --dir . --fix",
     "lint:secret:check": "npx secretlint \"**/*\"",
-    "concurrently": "concurrently --names next,jest --hide next -k -s command-jest \"next dev\" \"jest --runInBand\"",
-    "concurrently:watch": "concurrently --names next,jest --hide next -k -s command-jest \"next dev\" \"jest --watchAll --runInBand\"",
+    "concurrently": "concurrently --names next,jest --hide next -k -s command-jest \"next dev\" \"jest --runInBand --verbose\"",
+    "concurrently:watch": "concurrently --names next,jest --hide next -k -s command-jest \"next dev\" \"jest --watchAll --runInBand --verbose\"",
     "prepare": "husky",
     "commit": "cz"
   },
