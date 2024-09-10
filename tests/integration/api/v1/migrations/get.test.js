@@ -1,4 +1,4 @@
-import { clearDatabase } from "tests/utils/clearDatabase";
+const { clearDatabase } = require("tests/orchestrator");
 
 beforeAll(clearDatabase);
 
