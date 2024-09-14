@@ -1,23 +1,38 @@
-import database from "infra/database";
-import { clearDatabase } from "tests/utils/clearDatabase";
+const { clearDatabase } = require("tests/orchestrator");
 
 beforeAll(clearDatabase);
 
-test("POST to /api/v1/migrations should return 200", async () => {
-  const response = await fetch("http://localhost:3000/api/v1/migrations", {
-    method: "POST",
+describe("POST /api/v1/migrations", () => {
+  describe("Anonymous user", () => {
+    describe("Running pending migrations", () => {
+      test("For the first time", async () => {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/migrations",
+          {
+            method: "POST",
+          },
+        );
+        expect(response.status).toBe(201);
+
+        const responseBody = await response.json();
+
+        expect(Array.isArray(responseBody)).toBe(true);
+      });
+      test("For the second time", async () => {
+        const response = await fetch(
+          "http://localhost:3000/api/v1/migrations",
+          {
+            method: "POST",
+          },
+        );
+        expect(response.status).toBe(200);
+
+        const responseBody = await response.json();
+
+        expect(Array.isArray(responseBody)).toBe(true);
+
+        expect(responseBody.length).toBe(0);
+      });
+    });
   });
-  expect(response.status).toBe(201);
-
-  const responseBody = await response.json();
-
-  expect(Array.isArray(responseBody)).toBe(true);
-
-  const migrationsRunned = (
-    await database.query('SELECT * FROM "public"."pgmigrations"')
-  ).rows;
-
-  expect(Array.isArray(migrationsRunned)).toBe(true);
-
-  expect(migrationsRunned.length).toBeGreaterThan(0);
 });
