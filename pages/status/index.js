@@ -1,12 +1,8 @@
 import useSWR from "swr";
 
-async function fetchAPI(key) {
-  const response = await fetch(key);
-
-  const responseBody = await response.json();
-
-  return responseBody;
-}
+import styles from "./styles.module.css";
+import { fetchAPI } from "utils/fetchAPI";
+import { DependencyStatus } from "components/DependencyStatus";
 
 export default function Status() {
   const { data, isLoading, error } = useSWR("/api/v1/status", fetchAPI, {
@@ -16,17 +12,11 @@ export default function Status() {
   if (error) return <h1>Algo deu errado, tente novamente mais tarde.</h1>;
 
   return (
-    <>
+    <div className={styles.container}>
       <h1>Status</h1>
-      {isLoading ? (
-        <div>Carregando...</div>
-      ) : (
-        <>
-          <UpdatedAt updatedAt={data.updated_at} />
-          <Services dependencies={data.dependencies} />
-        </>
-      )}
-    </>
+      <UpdatedAt updatedAt={data.updated_at} isLoading={isLoading} />
+      <Services dependencies={data.dependencies} isLoading={isLoading} />
+    </div>
   );
 }
 
@@ -34,42 +24,22 @@ function UpdatedAt({ updatedAt }) {
   return <p>Atualizado em: {new Date(updatedAt).toLocaleString()}</p>;
 }
 
-function Services({ dependencies }) {
+function Services({ dependencies, isLoading }) {
   return (
     <div>
       <h2>Serviços:</h2>
-      <ul>
+      <div className={styles.container}>
         {Object.entries(dependencies).map(([key, dependency]) => (
-          <li key={key}>
-            <h3>{key}</h3>
-            {dependency.error ? (
-              <Error error={dependency.error} />
-            ) : (
-              <Dependency dependency={dependency} />
-            )}
-          </li>
+          <div key={key}>
+            <DependencyStatus
+              name={key}
+              error={dependency.error}
+              data={dependency}
+              isLoading={isLoading}
+            />
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
-  );
-}
-
-function Dependency({ dependency }) {
-  return (
-    <>
-      <h4 style={{ color: "green" }}>Status: Em funcionamento</h4>
-      <p>Versão: {dependency.version}</p>
-      <p>Número máximo de conexões: {dependency.max_connections}</p>
-      <p>Conexões abertas: {dependency.opened_connections}</p>
-    </>
-  );
-}
-
-function Error({ error }) {
-  return (
-    <>
-      <h4 style={{ color: "red" }}>Status: Erro ao tentar conectar</h4>
-      <p>Erro: {error}</p>
-    </>
   );
 }
