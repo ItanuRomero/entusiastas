@@ -14,13 +14,14 @@ export default function Status() {
   return (
     <div className={styles.container}>
       <h1>Status</h1>
-      <UpdatedAt updatedAt={data.updated_at} isLoading={isLoading} />
-      <Services dependencies={data.dependencies} isLoading={isLoading} />
+      <UpdatedAt updatedAt={data?.updated_at} isLoading={isLoading} />
+      <Services dependencies={data?.dependencies} isLoading={isLoading} />
     </div>
   );
 }
 
-function UpdatedAt({ updatedAt }) {
+function UpdatedAt({ updatedAt, isLoading }) {
+  if (isLoading) return <p>Atualizando...</p>;
   return <p>Atualizado em: {new Date(updatedAt).toLocaleString()}</p>;
 }
 
@@ -29,16 +30,18 @@ function Services({ dependencies, isLoading }) {
     <div>
       <h2>Serviços:</h2>
       <div className={styles.container}>
-        {Object.entries(dependencies).map(([key, dependency]) => (
-          <div key={key}>
-            <DependencyStatus
-              name={key}
-              error={dependency.error}
-              data={dependency}
-              isLoading={isLoading}
-            />
-          </div>
-        ))}
+        {dependencies && !isLoading
+          ? Object.entries(dependencies).map(([key, dependency]) => (
+              <div key={key}>
+                <DependencyStatus
+                  name={key}
+                  error={dependency.error}
+                  data={dependency}
+                  isLoading={isLoading}
+                />
+              </div>
+            ))
+          : "Carregando..."}
       </div>
     </div>
   );
