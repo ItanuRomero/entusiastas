@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 function Home() {
   return (
@@ -16,7 +17,10 @@ function Home() {
           <h1>
             Escreva sobre o que você é <strong>entusiasta</strong>
           </h1>
-          <p>Ainda estamos trabalhando nisso, mas não esqueça de voltar</p>
+          <p>
+            Ainda estamos trabalhando nisso... Mas você já pode ver a página de{" "}
+            <Link href={"/status"}>/status</Link>
+          </p>
         </div>
         <div
           style={{

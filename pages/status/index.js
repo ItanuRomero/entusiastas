@@ -3,6 +3,7 @@ import useSWR from "swr";
 import styles from "./styles.module.css";
 import { fetchAPI } from "utils/fetchAPI";
 import { DependencyStatus } from "components/DependencyStatus";
+import Link from "next/link";
 
 export default function Status() {
   const { data, isLoading, error } = useSWR("/api/v1/status", fetchAPI, {
@@ -16,6 +17,9 @@ export default function Status() {
       <h1>Status</h1>
       <UpdatedAt updatedAt={data?.updated_at} isLoading={isLoading} />
       <Services dependencies={data?.dependencies} isLoading={isLoading} />
+      <p>
+        Voltar para a <Link href={"/"}>/home</Link>
+      </p>
     </div>
   );
 }
