@@ -1,4 +1,6 @@
 import database from "infra/database.js";
+import { ConnectionError } from "infra/errors/private/database";
+import { InternalServerError } from "infra/errors/public/InternalServerError";
 
 export default async function status(request, response) {
   const updatedAt = new Date().toISOString();
@@ -18,13 +20,18 @@ export default async function status(request, response) {
       })
     ).rows[0].count;
   } catch (e) {
-    if (e instanceof Error)
+    if (e instanceof ConnectionError) {
       return response.status(207).json({
         updated_at: updatedAt,
         dependencies: {
           database: { error: "Cannot connect with database" },
         },
       });
+    } else {
+      console.error(e);
+      const publicError = new InternalServerError();
+      return response.status(publicError.status_code).json(publicError);
+    }
   }
 
   response.status(200).json({
